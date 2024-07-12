@@ -182,30 +182,30 @@ class SettingInterface(ScrollArea):
         self.aboutGroup = SettingCardGroup(self.tr('About'), self.scrollWidget)
         update_needed, update_text = self._checkUpdate()
         settings.UPDATE_NEEDED = update_needed
-        self.aboutCard = HyperlinkCard(
-            settings.RELEASE_URL,
-            self.tr('Release Website'),
-            QIcon(os.path.join(basedir, 'res/icons/system/update.svg')),
-            self.tr('Check Updates'),
-            update_text, #self.tr('Check update and learn more about the project on our GitHub page'),
-            self.aboutGroup
-        )
-        self.helpCard = HyperlinkCard(
-            settings.HELP_URL,
-            self.tr('Issue Page'),
-            FIF.HELP,
-            self.tr('Help & Issue'),
-            self.tr('Post your issue or question on our GitHub Issue, or contact us on BiliBili'),
-            self.aboutGroup
-        )
-        self.devCard = HyperlinkCard(
-            settings.DEVDOC_URL,
-            self.tr('Developer Document'),
-            QIcon(os.path.join(basedir, 'res/icons/system/document.svg')),
-            self.tr('Re-development'),
-            self.tr('If you want to develop your own pet/item/actions... Check here'),
-            self.aboutGroup
-        )
+        # self.aboutCard = HyperlinkCard(
+        #     settings.RELEASE_URL,
+        #     self.tr('Release Website'),
+        #     QIcon(os.path.join(basedir, 'res/icons/system/update.svg')),
+        #     self.tr('Check Updates'),
+        #     update_text, #self.tr('Check update and learn more about the project on our GitHub page'),
+        #     self.aboutGroup
+        # )
+        # self.helpCard = HyperlinkCard(
+        #     settings.HELP_URL,
+        #     self.tr('Issue Page'),
+        #     FIF.HELP,
+        #     self.tr('Help & Issue'),
+        #     self.tr('Post your issue or question on our GitHub Issue, or contact us on BiliBili'),
+        #     self.aboutGroup
+        # )
+        # self.devCard = HyperlinkCard(
+        #     settings.DEVDOC_URL,
+        #     self.tr('Developer Document'),
+        #     QIcon(os.path.join(basedir, 'res/icons/system/document.svg')),
+        #     self.tr('Re-development'),
+        #     self.tr('If you want to develop your own pet/item/actions... Check here'),
+        #     self.aboutGroup
+        # )
 
 
         self.__initWidget()
@@ -242,9 +242,9 @@ class SettingInterface(ScrollArea):
         self.PersonalGroup.addSettingCard(self.languageCard)
         self.PersonalGroup.addSettingCard(self.themeColorCard)
 
-        self.aboutGroup.addSettingCard(self.aboutCard)
-        self.aboutGroup.addSettingCard(self.helpCard)
-        self.aboutGroup.addSettingCard(self.devCard)
+        # self.aboutGroup.addSettingCard(self.aboutCard)
+        # self.aboutGroup.addSettingCard(self.helpCard)
+        # self.aboutGroup.addSettingCard(self.devCard)
 
         # add setting card group to layout
         self.expandLayout.setSpacing(28)
@@ -254,7 +254,7 @@ class SettingInterface(ScrollArea):
         self.expandLayout.addWidget(self.InteractionGroup)
         self.expandLayout.addWidget(self.VolumnGroup)
         self.expandLayout.addWidget(self.PersonalGroup)
-        self.expandLayout.addWidget(self.aboutGroup)
+        # self.expandLayout.addWidget(self.aboutGroup)
 
     def __setQss(self):
         """ set style sheet """

@@ -1,4 +1,4 @@
-pyinstaller --name "xiaoo" --onefile --windowed --icon=xiaoo.icns run_DyberPet.py
+pyinstaller --name "小O" --onefile --windowed --icon=xiaoo.icns run_DyberPet.py
 pyinstaller --name "xiaoo" --onefile --console --icon=xiaoo.icns run_DyberPet.py
 
 
