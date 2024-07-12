@@ -5,7 +5,14 @@ a = Analysis(
     ['run_DyberPet.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+   datas=[
+        ('res/icons', 'res/icons'),
+        ('res/items', 'res/items'),
+        ('res/language', 'res/language'),
+        ('res/pet', 'res/pet'),
+        ('res/role', 'res/role'),
+        ('res/sounds', 'res/sounds')
+    ],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
