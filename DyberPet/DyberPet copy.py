@@ -27,7 +27,6 @@ from DyberPet.Accessory import MouseMoveManager
 from DyberPet.extra_windows import *
 from DyberPet.custom_widgets import RoundBarBase
 #from DyberPet.DyberPetBackup.StartBackupManager import *
-from Browser import Browser
 
 # initialize settings
 import DyberPet.settings as settings
@@ -81,7 +80,6 @@ class DP_HpBar(QProgressBar):
         self.bar_color = QColor("#FAC486")  # Fill color
         self.border_color = QColor(0, 0, 0) # Border color
         self.border_width = 1               # Border width in pixels
-        
     
 
     def paintEvent(self, event):
@@ -395,7 +393,6 @@ class PetWidget(QWidget):
         :param pets: 全部宠物列表
         """
         super(PetWidget, self).__init__(parent) #, flags=Qt.WindowFlags())
-        self.browser_dialog = Browser()  # 添加这一行
         self.pets = settings.pets
         if curr_pet_name is None:
             self.curr_pet_name = settings.default_pet
@@ -974,14 +971,8 @@ class PetWidget(QWidget):
         # self.web_menu.addAction(visit_website_action)
 
         # method01
-        # self.StatMenu.addActions([
-        #     Action(QIcon(os.path.join(basedir,'res/icons/website.svg')), self.tr('召唤AI智能体'), triggered=lambda: self.browser_dialog.open_browser("https://ai.olightcloud.com")),
-        # ])
-
         self.StatMenu.addActions([
-            Action(QIcon(os.path.join(basedir,'res/icons/website.svg')), 
-                self.tr('召唤AI智能体'), 
-                triggered=self.open_browser),
+            Action(QIcon(os.path.join(basedir,'res/icons/website.svg')), self.tr('召唤AI智能体'), triggered=lambda: webbrowser.open("https://ai.olightcloud.com")),
         ])
 
 
@@ -998,8 +989,6 @@ class PetWidget(QWidget):
             Action(FIF.POWER_BUTTON, self.tr('Exit'), triggered=self.quit),
         ])
 
-    def open_browser(self):
-        self.browser_dialog.open_browser("https://ai.olightcloud.com")
 
     def _update_statusTitle(self, hp_tier):
         statusText = self.tr("Status: ") + f"{settings.TIER_NAMES[hp_tier]}"
