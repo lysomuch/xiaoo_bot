@@ -5,7 +5,7 @@ a = Analysis(
     ['run_DyberPet.py'],
     pathex=[],
     binaries=[],
-   datas=[
+    datas=[
         ('res/icons', 'res/icons'),
         ('res/items', 'res/items'),
         ('res/language', 'res/language'),

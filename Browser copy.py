@@ -3,7 +3,7 @@ from PySide6.QtCore import QUrl, Signal, Qt, QPropertyAnimation, QEasingCurve
 from PySide6.QtWidgets import QProgressBar, QMessageBox
 from PySide6.QtWebEngineWidgets import QWebEngineView
 from PySide6.QtWebEngineCore import QWebEnginePage, QWebEngineProfile
-from PySide6.QtGui import QIcon, QShortcut, QKeySequence
+from PySide6.QtGui import QShortcut, QKeySequence
 
 class Browser(QWebEngineView):
     closed = Signal()
@@ -14,7 +14,8 @@ class Browser(QWebEngineView):
 
     def setup_browser(self):
         # 设置语言
-        system_language = 'zh-CN'
+        system_language = locale.getlocale()[0] or 'zh-CN'
+        print(f"系统语言是：{system_language}")
 
         # 设置配置文件
         profile = QWebEngineProfile.defaultProfile()
@@ -27,10 +28,6 @@ class Browser(QWebEngineView):
         # 设置窗口属性
         self.setWindowTitle("小O给自己一个更聪明的大脑")
         self.resize(1200, 800)
-
-        # 设置图标
-        icon = QIcon("res/icons/icon.png")  # 替换为您的图标文件路径
-        self.setWindowIcon(icon)
 
         # 添加进度条
         self.progress_bar = QProgressBar(self)
