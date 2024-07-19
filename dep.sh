@@ -1,5 +1,6 @@
 pyinstaller --name "小O" --onefile --windowed --icon=xiaoo.icns run_DyberPet.py
 
+
    datas=[
         ('res/icons', 'res/icons'),
         ('res/items', 'res/items'),
