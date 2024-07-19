@@ -8,10 +8,9 @@ from DyberPet.DyberPet import PetWidget
 from DyberPet.Notification import DPNote
 from DyberPet.Accessory import DPAccessory
 
-from PySide6.QtWidgets import QApplication,QSystemTrayIcon
+from PySide6.QtWidgets import QApplication
 from PySide6 import QtCore
 from PySide6.QtCore import Qt, QLocale
-from PySide6.QtGui import QIcon
 
 from qfluentwidgets import  FluentTranslator, setThemeColor
 from DyberPet.DyberSettings.DyberControlPanel import ControlMainWindow
@@ -55,8 +54,6 @@ class DyberPetApp(QApplication):
             setThemeColor(settings.themeColor)
         
 
-        self.setup_tray_icon()
-
         # Pet Object
         self.p = PetWidget(screens=screens)
 
@@ -74,12 +71,6 @@ class DyberPetApp(QApplication):
 
         # Signal Links
         self.__connectSignalToSlot()
-
-    def setup_tray_icon(self):
-        self.tray_icon = QSystemTrayIcon(self)
-        icon = QIcon("res/icons/icon.png")
-        self.tray_icon.setIcon(icon)
-        self.tray_icon.setVisible(True)
 
     def __connectSignalToSlot(self):
         # Main Widget - others
@@ -145,6 +136,9 @@ class DyberPetApp(QApplication):
         self.board.animInterface.deletewAct.connect(self.p._deleteAct)
 
 
+        
+
+
 if platform == 'win32':
     basedir = ''
 else:
@@ -164,7 +158,6 @@ if __name__ == '__main__':
         Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
     #QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
     #QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps)
-
 
     app = DyberPetApp(sys.argv)
     app.setAttribute(Qt.AA_DontCreateNativeWidgetSiblings)
