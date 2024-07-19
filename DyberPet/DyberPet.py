@@ -11,9 +11,9 @@ from pathlib import Path
 import pynput.mouse as mouse
 
 from PySide6.QtWidgets import *
-from PySide6.QtCore import Qt, QTimer, QObject, QPoint, QEvent, QUrl
+from PySide6.QtCore import Qt, QTimer, QObject, QPoint, QEvent
 from PySide6.QtCore import QObject, QThread, Signal
-from PySide6.QtGui import QImage, QPixmap, QIcon, QCursor, QPainter, QFont, QFontMetrics, QAction, QBrush, QPen, QDesktopServices
+from PySide6.QtGui import QImage, QPixmap, QIcon, QCursor, QPainter, QFont, QFontMetrics, QAction, QBrush, QPen
 
 from qfluentwidgets import CaptionLabel, setFont, Action #,RoundMenu
 from qfluentwidgets import FluentIcon as FIF
@@ -27,7 +27,6 @@ from DyberPet.Accessory import MouseMoveManager
 from DyberPet.extra_windows import *
 from DyberPet.custom_widgets import RoundBarBase
 #from DyberPet.DyberPetBackup.StartBackupManager import *
-from Browser import Browser
 
 # initialize settings
 import DyberPet.settings as settings
@@ -57,7 +56,6 @@ sys_pp_item = settings.PP_ITEM
 sys_pp_audio = settings.PP_AUDIO
 
 
-
 # Pet HP progress bar
 class DP_HpBar(QProgressBar):
     hptier_changed = Signal(int, str, name='hptier_changed')
@@ -81,9 +79,7 @@ class DP_HpBar(QProgressBar):
         self.bar_color = QColor("#FAC486")  # Fill color
         self.border_color = QColor(0, 0, 0) # Border color
         self.border_width = 1               # Border width in pixels
-        
     
-
     def paintEvent(self, event):
         painter = QPainter(self)
         painter.setRenderHint(QPainter.Antialiasing)
@@ -395,7 +391,6 @@ class PetWidget(QWidget):
         :param pets: 全部宠物列表
         """
         super(PetWidget, self).__init__(parent) #, flags=Qt.WindowFlags())
-        self.browser_dialog = Browser()  # 添加这一行
         self.pets = settings.pets
         if curr_pet_name is None:
             self.curr_pet_name = settings.default_pet
@@ -973,21 +968,10 @@ class PetWidget(QWidget):
         # visit_website_action.triggered.connect(lambda: webbrowser.open("https://ai.olightcloud.com"))
         # self.web_menu.addAction(visit_website_action)
 
-        # method01
-        # self.StatMenu.addActions([
-        #     Action(QIcon(os.path.join(basedir,'res/icons/website.svg')), self.tr('召唤AI智能体'), triggered=lambda: self.browser_dialog.open_browser("https://ai.olightcloud.com")),
-        # ])
 
         self.StatMenu.addActions([
-            Action(QIcon(os.path.join(basedir,'res/icons/website.svg')), 
-                self.tr('召唤AI智能体'), 
-                triggered=self.open_browser),
+            Action(QIcon(os.path.join(basedir,'res/icons/website.svg')), self.tr('召唤AI智能体'), triggered=lambda: webbrowser.open("https://ai.olightcloud.com")),
         ])
-
-
-        # self.StatMenu.addActions([
-        #     Action(QIcon(os.path.join(basedir, 'res/icons/website.svg')), self.tr('召唤AI智能体'), triggered=lambda: open_web("https://ai.olightcloud.com")),
-        # ])
 
         # self.StatMenu.addMenu(self.act_menu)
         # self.StatMenu.addMenu(self.companion_menu)
@@ -998,8 +982,6 @@ class PetWidget(QWidget):
             Action(FIF.POWER_BUTTON, self.tr('Exit'), triggered=self.quit),
         ])
 
-    def open_browser(self):
-        self.browser_dialog.open_browser("https://ai.olightcloud.com")
 
     def _update_statusTitle(self, hp_tier):
         statusText = self.tr("Status: ") + f"{settings.TIER_NAMES[hp_tier]}"
@@ -1025,10 +1007,6 @@ class PetWidget(QWidget):
             webbrowser.open(web_address)
         except:
             return
-        
-    # def open_web(url):
-    #     QDesktopServices.openUrl(QUrl(url))
-
     '''
     def freeze_pet(self):
         """stop all thread, function for save import"""
